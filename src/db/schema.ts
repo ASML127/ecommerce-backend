@@ -24,7 +24,7 @@ export type UserSelect = typeof usersTable.$inferSelect;
 
 export const addressesTable = pgTable('addresses', {
   id: integer('id').primaryKey().generatedAlwaysAsIdentity().unique().notNull(),
-  user_id: integer('user_id').references(() => usersTable.id, {onUpdate: "cascade", onDelete: "cascade"}),
+  user_id: integer('user_id').references(() => usersTable.id, {onUpdate: "cascade", onDelete: "cascade"}).notNull(),
   address_line1: varchar('address_line1', {length: 255}).notNull(),
   address_line2: varchar('address_line2'),
   city: varchar('city', {length: 100}).notNull(),
