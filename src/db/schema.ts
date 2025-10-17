@@ -153,7 +153,3 @@ export const paymentsTable = pgTable('payments', {
 
 export type PaymentInsert = typeof paymentsTable.$inferInsert;
 export type PaymentSelect = typeof paymentsTable.$inferSelect;
-
-/* 
-
-*/
