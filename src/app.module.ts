@@ -6,6 +6,7 @@ import { AddressesModule } from './addresses/addresses.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ProductsModule } from './products/products.module';
 import { ProductImagesModule } from './product-images/product-images.module';
+import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ProductImagesModule } from './product-images/product-images.module';
     CategoriesModule,
     ProductsModule,
     ProductImagesModule,
+    ShoppingCartModule,
   ],
 })
 export class AppModule {}
