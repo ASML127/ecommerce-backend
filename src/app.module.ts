@@ -7,6 +7,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { ProductsModule } from './products/products.module';
 import { ProductImagesModule } from './product-images/product-images.module';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
+import { CartItemsModule } from './cart-items/cart-items.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
     ProductsModule,
     ProductImagesModule,
     ShoppingCartModule,
+    CartItemsModule,
   ],
 })
 export class AppModule {}
