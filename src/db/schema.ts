@@ -143,7 +143,7 @@ export const paymentsTable = pgTable('payments', {
   order_id: integer('order_id').references(() => ordersTable.id).unique().notNull(),
   payment_method: varchar('payment_method', {length: 50, enum: ['credit_card', 'debit_card', 'paypal', 'mercado_pago']}).notNull(),
   payment_gateway_id: varchar('payment_gateway_id', {length: 255}),
-  amount: decimal('amount').notNull(),
+  amount: decimal('amount', {mode: "number"}).notNull(),
   currency: varchar('currency', {length: 3}).default('CUP'),
   status: varchar('status', {length: 50, enum: ['pending', 'processing', 'completed', 'failed', 'refunded']}).notNull(),
   // respuesta de la pasarela de pago
