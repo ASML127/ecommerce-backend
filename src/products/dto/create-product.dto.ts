@@ -15,11 +15,11 @@ export class CreateProductDto {
     @IsNotEmpty()
     price: number;
 
-    @IsDecimal()
+    @IsInt()
     @IsNotEmpty()
     compare_price: number;
 
-    @IsDecimal()
+    @IsInt()
     @IsNotEmpty()
     cost: number;
 
