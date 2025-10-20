@@ -9,7 +9,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable('users', {
-    id: integer('id').primaryKey().generatedAlwaysAsIdentity().unique().notNull(),
+    id: integer('id').primaryKey().generatedAlwaysAsIdentity().notNull(),
     email: varchar('email', {length: 100}).unique().notNull(),
     password: varchar('password', {length: 255}).notNull(),
     first_name: varchar('first_name', {length: 100}).notNull(),
@@ -23,7 +23,7 @@ export type UserInsert = typeof usersTable.$inferInsert;
 export type UserSelect = typeof usersTable.$inferSelect;
 
 export const addressesTable = pgTable('addresses', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity().unique().notNull(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity().notNull(),
   user_id: integer('user_id').references(() => usersTable.id, {onUpdate: "cascade", onDelete: "cascade"}).notNull(),
   address_line1: varchar('address_line1', {length: 255}).notNull(),
   address_line2: varchar('address_line2'),
@@ -39,7 +39,7 @@ export type AddressesInsert = typeof addressesTable.$inferInsert;
 export type AddressesSelect = typeof addressesTable.$inferSelect;
 
 export const categoriesTable = pgTable('categories', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity().unique().notNull(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity().notNull(),
   name: varchar('name', {length: 100}).unique().notNull(),
   description: text('description'),
   image_path: varchar('image_path', {length: 255}),
@@ -51,7 +51,7 @@ export type CategoriesInsert = typeof categoriesTable.$inferInsert;
 export type CategoriesSelect = typeof categoriesTable.$inferSelect;
 
 export const productsTable = pgTable('products', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity().unique().notNull(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity().notNull(),
   name: varchar('name', {length: 255}).notNull(),
   description: text(),
   price: integer('price').notNull(),
@@ -71,7 +71,7 @@ export type ProductInsert = typeof productsTable.$inferInsert;
 export type ProductSelect = typeof productsTable.$inferSelect;
 
 export const productImagesTable = pgTable('product_images', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity().unique().notNull(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity().notNull(),
   product_id: integer('product_id').references(() => productsTable.id, {onDelete:"cascade", onUpdate: "cascade"}),
   image_path: varchar('image_url', {length: 255}).notNull(),
   alt_text: varchar('alt_text', {length:255}),
@@ -84,7 +84,7 @@ export type ProductImageInsert = typeof productImagesTable.$inferInsert;
 export type ProductImageSelect = typeof productImagesTable.$inferSelect;
 
 export const shoppingCartsTable = pgTable('shopping_carts', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity().unique().notNull(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity().notNull(),
   user_id: integer('user_id').references(() => usersTable.id, {onDelete: "cascade", onUpdate: "cascade"}).notNull().unique(),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
@@ -94,7 +94,7 @@ export type ShoppingCartInsert = typeof shoppingCartsTable.$inferInsert;
 export type ShoppingCartSelect = typeof shoppingCartsTable.$inferSelect;
 
 export const cartItemsTable = pgTable('cart_items', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity().unique().notNull(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity().notNull(),
   cart_id: integer('cart_id').references(() => shoppingCartsTable.id, {onDelete:"cascade", onUpdate:"cascade"}).notNull(),
   product_id: integer('product_id').references(() => productsTable.id).notNull(),
   quantity: integer('quantity').notNull(),
@@ -107,7 +107,7 @@ export type CartItemInsert = typeof cartItemsTable.$inferInsert;
 export type CartItemSelect = typeof cartItemsTable.$inferSelect;
 
 export const ordersTable = pgTable('orders', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity().unique().notNull(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity().notNull(),
   order_number: varchar('order_number', {length: 50}).unique().notNull(),
   user_id: integer('user_id').references(() => usersTable.id).notNull(),
   status: varchar('status', {length: 50, enum: ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled']}).notNull().default('pending'),
@@ -125,7 +125,7 @@ export type OrderInsert = typeof ordersTable.$inferInsert;
 export type OrderSelect = typeof ordersTable.$inferSelect;
 
 export const orderItemsTable = pgTable('order_items', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity().unique().notNull(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity().notNull(),
   order_id: integer('order_id').references(() => ordersTable.id, {onDelete:"cascade", onUpdate:"cascade"}).notNull(),
   product_id: integer('product_id').references(() => productsTable.id).notNull(),
   product_name: varchar('product_name', {length: 255}).notNull(),
@@ -139,7 +139,7 @@ export type OrderItemInsert = typeof orderItemsTable.$inferInsert;
 export type OrderItemSelect = typeof orderItemsTable.$inferSelect;
 
 export const paymentsTable = pgTable('payments', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity().unique().notNull(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity().notNull(),
   order_id: integer('order_id').references(() => ordersTable.id).unique().notNull(),
   payment_method: varchar('payment_method', {length: 50, enum: ['credit_card', 'debit_card', 'paypal', 'mercado_pago']}).notNull(),
   payment_gateway_id: varchar('payment_gateway_id', {length: 255}),
