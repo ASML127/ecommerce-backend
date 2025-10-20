@@ -129,9 +129,9 @@ export const orderItemsTable = pgTable('order_items', {
   order_id: integer('order_id').references(() => ordersTable.id, {onDelete:"cascade", onUpdate:"cascade"}).notNull(),
   product_id: integer('product_id').references(() => productsTable.id).notNull(),
   product_name: varchar('product_name', {length: 255}).notNull(),
-  product_price: decimal('product_price').notNull(),
+  product_price: decimal('product_price', {mode: "number"}).notNull(),
   quantity: integer('quantity').notNull(),
-  total_price: decimal('total_price').notNull(),
+  total_price: decimal('total_price', {mode: "number"}).notNull(),
   created_at: timestamp('created_at').defaultNow(),
 })
 
